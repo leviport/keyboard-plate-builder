@@ -1,9 +1,23 @@
 $fn=100;
 union()
 {
-	cube([14,14,4]);
-	translate([-1,4.5,0])
+	union()
 	{
-		cube([16,5,2.6]);
+		cube([14,14,4]);
+		translate([-1,4.5,0])
+		{
+			cube([16,5,2.6]);
+		}
+	}
+	translate([19,0,0])
+	{
+		union()
+		{
+			cube([14,14,4]);
+			translate([-1,4.5,0])
+			{
+				cube([16,5,2.6]);
+			}
+		}
 	}
 }

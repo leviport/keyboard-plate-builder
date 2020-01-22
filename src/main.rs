@@ -16,7 +16,17 @@ fn main() {
         })
     );
 
-    my_scad.add_object(mx_switch_hole.clone());
+    let mut plate_switch_holes = scad!(Union);
+
+    plate_switch_holes.add_child(mx_switch_hole.clone());
+
+    plate_switch_holes.add_child(
+        scad!(Translate(vec3(19.0, 0.0, 0.0)); {
+            mx_switch_hole.clone()
+        })
+    );
+
+    my_scad.add_object(plate_switch_holes.clone());
 
     my_scad.write_to_file(String::from("output_file.scad"));
 }
