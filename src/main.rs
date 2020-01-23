@@ -1,6 +1,10 @@
 use scad::*;
 
 fn main() {
+
+    let rows: i32 = 50;
+    let columns: i32 = 150;
+
     // my file which stores my output
     let mut output_scad = ScadFile::new();
 
@@ -16,14 +20,14 @@ fn main() {
 
     let mut plate_switch_holes = scad!(Union);
 
-    //plate_switch_holes.add_child(mx_switch_hole.clone());
-
-    for i in (0..15).rev() {
-        plate_switch_holes.add_child(
-            scad!(Translate(vec3(i as f32 * 19.0, 0.0, 0.0)); {
-                mx_switch_hole.clone()
-            })
-        );
+    for row in (0..rows).rev() {
+        for i in (0..columns).rev() {
+            plate_switch_holes.add_child(
+                scad!(Translate(vec3(i as f32 * 19.0, row as f32 * 19.0, 0.0)); {
+                    mx_switch_hole.clone()
+                })
+            );
+        }
     }
 
     output_scad.add_object(plate_switch_holes.clone());
